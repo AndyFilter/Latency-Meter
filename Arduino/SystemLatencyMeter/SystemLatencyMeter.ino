@@ -1,5 +1,4 @@
 const int LDR = A1;
-const int Audio = A1;
 const int button = 2;
 
 int LDRValue = 0;
