@@ -1,9 +1,8 @@
-const int LDR = A1;
+const int LDR = A0;
 const int button = 2;
 
 int LDRValue = 0;
 int LastLDR = 0;
-int AudioValue = 0;
 unsigned long Started = 0;
 bool isWaiting = 0;
 int buttonState = 0; 
@@ -19,6 +18,7 @@ pinMode(LDR, INPUT);
 void loop() {
     LDRValue = analogRead(LDR);
     buttonState = digitalRead(button);
+    //Serial.println(LDRValue);
     if(buttonState == LOW && (millis() - Started > 400)) {
       Serial.println("b");
       isWaiting = 1;
@@ -31,9 +31,9 @@ void loop() {
       LDRprobe = millis();
     }
      
-      if (Serial.available() > 0 && !isWaiting){
+      if (Serial.available() > 0 && !isWaiting && Serial.read()>0){
        Serial.println("z");
-       LastLDR = LDRValue;
+       //LastLDR = LDRValue;
     }
 
     if(millis() - LDRprobe > 100 && !isWaiting){
