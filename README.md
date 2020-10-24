@@ -9,7 +9,7 @@ So... This is my First c++ code, pls be gentle. There is so much garbage and use
 
 Arduino Pin configuration should as follows:
 
-Light_Sensor - A0
+Light_Sensor - A0,
 Button - 2
 
 I would recommend putting a 500Ω resistor in series with the light sensor. The button is configured to use a arduino UNO built-in "pullup" resistor" (button, INPUT_PULLUP)
