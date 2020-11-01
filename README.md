@@ -9,6 +9,8 @@ So... This is my First c++ code, pls be gentle. There is so much garbage and use
 
 Arduino Pin configuration should as follows:
 
+<img align="left" width="500" src="SystemLatencyApp/Media/LightsensorLatencyMeter.png">
+
 <b>Light_Sensor - A0, </br></b>
 <b>Button - 2 </b>
 

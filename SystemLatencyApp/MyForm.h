@@ -894,6 +894,8 @@ namespace SystemLatencyApp {
 			   this->toolTip1->AutoPopDelay = 10000;
 			   this->toolTip1->InitialDelay = 300;
 			   this->toolTip1->ReshowDelay = 100;
+			   this->toolTip1->ToolTipIcon = System::Windows::Forms::ToolTipIcon::Info;
+			   this->toolTip1->ToolTipTitle = L"Remember";
 			   // 
 			   // MyForm
 			   // 
@@ -1025,9 +1027,10 @@ namespace SystemLatencyApp {
 				mouse_event(MOUSEEVENTF_LEFTDOWN, 813, 731, 0, 0);
 				mouse_event(MOUSEEVENTF_LEFTUP, 813, 731, 0, 0);
 			}
-			else
+			else {
 				start = std::chrono::steady_clock::now();
 				LightZone->BackColor = Color::White;
+			}
 		}
 		else if (StrData.find("z") != std::string::npos) {
 			PingEnd = std::chrono::steady_clock::now();
