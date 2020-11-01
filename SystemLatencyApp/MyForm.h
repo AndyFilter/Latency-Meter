@@ -31,6 +31,7 @@ namespace SystemLatencyApp {
 	std::chrono::steady_clock::time_point PingStart;
 	std::vector<int> TestsSys;
 	std::vector<int> TestsMouse;
+	std::vector<int> TestsPC;
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -119,6 +120,20 @@ namespace SystemLatencyApp {
 
 	public: System::Windows::Forms::Label^ label16;
 	private: System::Windows::Forms::Button^ RemoveSavedFile;
+	private: System::Windows::Forms::CheckBox^ IntegratedCheck;
+
+
+	private: System::Windows::Forms::ToolTip^ toolTip1;
+	private: System::Windows::Forms::Panel^ panel12;
+	private: System::Windows::Forms::Label^ MinPC;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Panel^ panel13;
+	private: System::Windows::Forms::Label^ AvgPC;
+	private: System::Windows::Forms::Label^ label18;
+	private: System::Windows::Forms::Panel^ panel11;
+	public: System::Windows::Forms::Label^ MinMouse;
+	private:
+	public: System::Windows::Forms::Label^ label3;
 	public:
 	private:
 	public:
@@ -150,6 +165,15 @@ namespace SystemLatencyApp {
 			   this->button3 = (gcnew System::Windows::Forms::Button());
 			   this->label6 = (gcnew System::Windows::Forms::Label());
 			   this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			   this->panel12 = (gcnew System::Windows::Forms::Panel());
+			   this->MinPC = (gcnew System::Windows::Forms::Label());
+			   this->label5 = (gcnew System::Windows::Forms::Label());
+			   this->panel13 = (gcnew System::Windows::Forms::Panel());
+			   this->AvgPC = (gcnew System::Windows::Forms::Label());
+			   this->label18 = (gcnew System::Windows::Forms::Label());
+			   this->panel11 = (gcnew System::Windows::Forms::Panel());
+			   this->MinMouse = (gcnew System::Windows::Forms::Label());
+			   this->label3 = (gcnew System::Windows::Forms::Label());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->Reset = (gcnew System::Windows::Forms::Button());
 			   this->panel3 = (gcnew System::Windows::Forms::Panel());
@@ -164,12 +188,12 @@ namespace SystemLatencyApp {
 			   this->AvgMouse = (gcnew System::Windows::Forms::Label());
 			   this->Label9 = (gcnew System::Windows::Forms::Label());
 			   this->panel1 = (gcnew System::Windows::Forms::Panel());
-			   this->panel7 = (gcnew System::Windows::Forms::Panel());
-			   this->MinSys = (gcnew System::Windows::Forms::Label());
-			   this->Label10 = (gcnew System::Windows::Forms::Label());
 			   this->panel8 = (gcnew System::Windows::Forms::Panel());
 			   this->label8 = (gcnew System::Windows::Forms::Label());
 			   this->SaveName = (gcnew System::Windows::Forms::TextBox());
+			   this->panel7 = (gcnew System::Windows::Forms::Panel());
+			   this->MinSys = (gcnew System::Windows::Forms::Label());
+			   this->Label10 = (gcnew System::Windows::Forms::Label());
 			   this->LightZone = (gcnew System::Windows::Forms::Panel());
 			   this->label11 = (gcnew System::Windows::Forms::Label());
 			   this->label7 = (gcnew System::Windows::Forms::Label());
@@ -185,14 +209,19 @@ namespace SystemLatencyApp {
 			   this->FileCB = (gcnew System::Windows::Forms::ComboBox());
 			   this->label16 = (gcnew System::Windows::Forms::Label());
 			   this->RemoveSavedFile = (gcnew System::Windows::Forms::Button());
+			   this->IntegratedCheck = (gcnew System::Windows::Forms::CheckBox());
+			   this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			   this->tableLayoutPanel1->SuspendLayout();
+			   this->panel12->SuspendLayout();
+			   this->panel13->SuspendLayout();
+			   this->panel11->SuspendLayout();
 			   this->panel3->SuspendLayout();
 			   this->panel2->SuspendLayout();
 			   this->panel4->SuspendLayout();
 			   this->panel5->SuspendLayout();
 			   this->panel6->SuspendLayout();
-			   this->panel7->SuspendLayout();
 			   this->panel8->SuspendLayout();
+			   this->panel7->SuspendLayout();
 			   this->Saves->SuspendLayout();
 			   this->panel9->SuspendLayout();
 			   this->panel10->SuspendLayout();
@@ -254,10 +283,10 @@ namespace SystemLatencyApp {
 			   this->comboBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->comboBox1->FormattingEnabled = true;
-			   this->comboBox1->Location = System::Drawing::Point(172, 3);
+			   this->comboBox1->Location = System::Drawing::Point(172, 4);
 			   this->comboBox1->Margin = System::Windows::Forms::Padding(0, 3, 0, 0);
 			   this->comboBox1->Name = L"comboBox1";
-			   this->comboBox1->Size = System::Drawing::Size(172, 21);
+			   this->comboBox1->Size = System::Drawing::Size(170, 21);
 			   this->comboBox1->TabIndex = 7;
 			   this->comboBox1->SelectionChangeCommitted += gcnew System::EventHandler(this, &MyForm::MadeSelection);
 			   this->comboBox1->Enter += gcnew System::EventHandler(this, &MyForm::AddPorts);
@@ -276,9 +305,9 @@ namespace SystemLatencyApp {
 			   // 
 			   this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->button3->Location = System::Drawing::Point(175, 61);
+			   this->button3->Location = System::Drawing::Point(175, 37);
 			   this->button3->Name = L"button3";
-			   this->button3->Size = System::Drawing::Size(166, 41);
+			   this->button3->Size = System::Drawing::Size(164, 41);
 			   this->button3->TabIndex = 9;
 			   this->button3->Text = L"Calculate Mouse Latency";
 			   this->button3->UseVisualStyleBackColor = true;
@@ -300,6 +329,8 @@ namespace SystemLatencyApp {
 				   | System::Windows::Forms::AnchorStyles::Left)
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->tableLayoutPanel1->AutoSize = true;
+			   this->tableLayoutPanel1->BackColor = System::Drawing::Color::Gray;
+			   this->tableLayoutPanel1->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			   this->tableLayoutPanel1->ColumnCount = 3;
 			   this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				   33.33333F)));
@@ -307,8 +338,11 @@ namespace SystemLatencyApp {
 				   33.33333F)));
 			   this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				   33.33333F)));
-			   this->tableLayoutPanel1->Controls->Add(this->button4, 0, 5);
-			   this->tableLayoutPanel1->Controls->Add(this->Reset, 1, 4);
+			   this->tableLayoutPanel1->Controls->Add(this->panel12, 2, 3);
+			   this->tableLayoutPanel1->Controls->Add(this->panel13, 2, 4);
+			   this->tableLayoutPanel1->Controls->Add(this->panel11, 1, 3);
+			   this->tableLayoutPanel1->Controls->Add(this->button4, 0, 6);
+			   this->tableLayoutPanel1->Controls->Add(this->Reset, 1, 5);
 			   this->tableLayoutPanel1->Controls->Add(this->panel3, 2, 2);
 			   this->tableLayoutPanel1->Controls->Add(this->panel2, 1, 2);
 			   this->tableLayoutPanel1->Controls->Add(this->button2, 2, 0);
@@ -316,32 +350,135 @@ namespace SystemLatencyApp {
 			   this->tableLayoutPanel1->Controls->Add(this->comboBox1, 1, 0);
 			   this->tableLayoutPanel1->Controls->Add(this->button3, 1, 1);
 			   this->tableLayoutPanel1->Controls->Add(this->panel4, 0, 2);
-			   this->tableLayoutPanel1->Controls->Add(this->panel5, 0, 3);
-			   this->tableLayoutPanel1->Controls->Add(this->panel6, 1, 3);
+			   this->tableLayoutPanel1->Controls->Add(this->panel5, 0, 4);
+			   this->tableLayoutPanel1->Controls->Add(this->panel6, 1, 4);
 			   this->tableLayoutPanel1->Controls->Add(this->panel1, 2, 1);
-			   this->tableLayoutPanel1->Controls->Add(this->panel7, 2, 3);
-			   this->tableLayoutPanel1->Controls->Add(this->panel8, 1, 5);
-			   this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			   this->tableLayoutPanel1->Controls->Add(this->panel8, 1, 6);
+			   this->tableLayoutPanel1->Controls->Add(this->panel7, 0, 3);
+			   this->tableLayoutPanel1->Location = System::Drawing::Point(12, 45);
 			   this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(0);
 			   this->tableLayoutPanel1->MaximumSize = System::Drawing::Size(516, 442);
 			   this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			   this->tableLayoutPanel1->RowCount = 6;
-			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 13.27547F)));
-			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.90579F)));
-			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 23.2903F)));
-			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 19.23077F)));
-			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 13.57466F)));
-			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 16.51584F)));
-			   this->tableLayoutPanel1->Size = System::Drawing::Size(516, 442);
+			   this->tableLayoutPanel1->RowCount = 7;
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
+			   this->tableLayoutPanel1->Size = System::Drawing::Size(516, 397);
 			   this->tableLayoutPanel1->TabIndex = 11;
+			   // 
+			   // panel12
+			   // 
+			   this->panel12->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->panel12->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			   this->panel12->Controls->Add(this->MinPC);
+			   this->panel12->Controls->Add(this->label5);
+			   this->panel12->Location = System::Drawing::Point(346, 140);
+			   this->panel12->Name = L"panel12";
+			   this->panel12->Size = System::Drawing::Size(166, 48);
+			   this->panel12->TabIndex = 13;
+			   // 
+			   // MinPC
+			   // 
+			   this->MinPC->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				   | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->MinPC->AutoSize = true;
+			   this->MinPC->BackColor = System::Drawing::Color::Gray;
+			   this->MinPC->Location = System::Drawing::Point(3, 35);
+			   this->MinPC->Name = L"MinPC";
+			   this->MinPC->Size = System::Drawing::Size(26, 13);
+			   this->MinPC->TabIndex = 0;
+			   this->MinPC->Text = L"0ms";
+			   // 
+			   // label5
+			   // 
+			   this->label5->AutoSize = true;
+			   this->label5->BackColor = System::Drawing::Color::Gray;
+			   this->label5->Location = System::Drawing::Point(3, 11);
+			   this->label5->Name = L"label5";
+			   this->label5->Size = System::Drawing::Size(103, 13);
+			   this->label5->TabIndex = 5;
+			   this->label5->Text = L"Minimal PC Latency:";
+			   // 
+			   // panel13
+			   // 
+			   this->panel13->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->panel13->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			   this->panel13->Controls->Add(this->AvgPC);
+			   this->panel13->Controls->Add(this->label18);
+			   this->panel13->Location = System::Drawing::Point(346, 195);
+			   this->panel13->Name = L"panel13";
+			   this->panel13->Size = System::Drawing::Size(166, 48);
+			   this->panel13->TabIndex = 13;
+			   // 
+			   // AvgPC
+			   // 
+			   this->AvgPC->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				   | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->AvgPC->AutoSize = true;
+			   this->AvgPC->BackColor = System::Drawing::Color::Gray;
+			   this->AvgPC->Location = System::Drawing::Point(3, 35);
+			   this->AvgPC->Name = L"AvgPC";
+			   this->AvgPC->Size = System::Drawing::Size(26, 13);
+			   this->AvgPC->TabIndex = 0;
+			   this->AvgPC->Text = L"0ms";
+			   // 
+			   // label18
+			   // 
+			   this->label18->AutoSize = true;
+			   this->label18->BackColor = System::Drawing::Color::Gray;
+			   this->label18->Location = System::Drawing::Point(3, 11);
+			   this->label18->Name = L"label18";
+			   this->label18->Size = System::Drawing::Size(108, 13);
+			   this->label18->TabIndex = 5;
+			   this->label18->Text = L"Average PC Latency:";
+			   // 
+			   // panel11
+			   // 
+			   this->panel11->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->panel11->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			   this->panel11->Controls->Add(this->MinMouse);
+			   this->panel11->Controls->Add(this->label3);
+			   this->panel11->Location = System::Drawing::Point(175, 140);
+			   this->panel11->Name = L"panel11";
+			   this->panel11->Size = System::Drawing::Size(164, 48);
+			   this->panel11->TabIndex = 12;
+			   // 
+			   // MinMouse
+			   // 
+			   this->MinMouse->AutoSize = true;
+			   this->MinMouse->BackColor = System::Drawing::Color::Gray;
+			   this->MinMouse->Location = System::Drawing::Point(6, 35);
+			   this->MinMouse->Name = L"MinMouse";
+			   this->MinMouse->Size = System::Drawing::Size(26, 13);
+			   this->MinMouse->TabIndex = 8;
+			   this->MinMouse->Text = L"0ms";
+			   // 
+			   // label3
+			   // 
+			   this->label3->AutoSize = true;
+			   this->label3->BackColor = System::Drawing::Color::Gray;
+			   this->label3->Location = System::Drawing::Point(6, 11);
+			   this->label3->Name = L"label3";
+			   this->label3->Size = System::Drawing::Size(121, 13);
+			   this->label3->TabIndex = 10;
+			   this->label3->Text = L"Minimal Mouse Latency:";
 			   // 
 			   // button4
 			   // 
 			   this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->button4->Location = System::Drawing::Point(3, 371);
+			   this->button4->Location = System::Drawing::Point(4, 286);
 			   this->button4->Name = L"button4";
-			   this->button4->Size = System::Drawing::Size(166, 29);
+			   this->button4->Size = System::Drawing::Size(164, 29);
 			   this->button4->TabIndex = 15;
 			   this->button4->Text = L"Save Records";
 			   this->button4->UseVisualStyleBackColor = true;
@@ -351,9 +488,9 @@ namespace SystemLatencyApp {
 			   // 
 			   this->Reset->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->Reset->Location = System::Drawing::Point(175, 312);
+			   this->Reset->Location = System::Drawing::Point(175, 250);
 			   this->Reset->Name = L"Reset";
-			   this->Reset->Size = System::Drawing::Size(166, 29);
+			   this->Reset->Size = System::Drawing::Size(164, 29);
 			   this->Reset->TabIndex = 12;
 			   this->Reset->Text = L"Reset";
 			   this->Reset->UseVisualStyleBackColor = true;
@@ -366,7 +503,7 @@ namespace SystemLatencyApp {
 			   this->panel3->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			   this->panel3->Controls->Add(this->SysLat);
 			   this->panel3->Controls->Add(this->label4);
-			   this->panel3->Location = System::Drawing::Point(347, 126);
+			   this->panel3->Location = System::Drawing::Point(346, 85);
 			   this->panel3->Name = L"panel3";
 			   this->panel3->Size = System::Drawing::Size(166, 48);
 			   this->panel3->TabIndex = 12;
@@ -378,15 +515,15 @@ namespace SystemLatencyApp {
 			   this->panel2->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			   this->panel2->Controls->Add(this->MouseLat);
 			   this->panel2->Controls->Add(this->label6);
-			   this->panel2->Location = System::Drawing::Point(175, 126);
+			   this->panel2->Location = System::Drawing::Point(175, 85);
 			   this->panel2->Name = L"panel2";
-			   this->panel2->Size = System::Drawing::Size(166, 48);
+			   this->panel2->Size = System::Drawing::Size(164, 48);
 			   this->panel2->TabIndex = 11;
 			   // 
 			   // button2
 			   // 
 			   this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			   this->button2->Location = System::Drawing::Point(435, 3);
+			   this->button2->Location = System::Drawing::Point(434, 4);
 			   this->button2->Margin = System::Windows::Forms::Padding(6, 3, 6, 6);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(75, 23);
@@ -397,7 +534,7 @@ namespace SystemLatencyApp {
 			   // 
 			   // button1
 			   // 
-			   this->button1->Location = System::Drawing::Point(6, 3);
+			   this->button1->Location = System::Drawing::Point(7, 4);
 			   this->button1->Margin = System::Windows::Forms::Padding(6, 3, 6, 6);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(75, 23);
@@ -413,9 +550,9 @@ namespace SystemLatencyApp {
 			   this->panel4->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			   this->panel4->Controls->Add(this->PcLat);
 			   this->panel4->Controls->Add(this->label2);
-			   this->panel4->Location = System::Drawing::Point(3, 126);
+			   this->panel4->Location = System::Drawing::Point(4, 85);
 			   this->panel4->Name = L"panel4";
-			   this->panel4->Size = System::Drawing::Size(166, 48);
+			   this->panel4->Size = System::Drawing::Size(164, 48);
 			   this->panel4->TabIndex = 12;
 			   // 
 			   // panel5
@@ -425,9 +562,9 @@ namespace SystemLatencyApp {
 			   this->panel5->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			   this->panel5->Controls->Add(this->AvgSys);
 			   this->panel5->Controls->Add(this->label12);
-			   this->panel5->Location = System::Drawing::Point(3, 228);
+			   this->panel5->Location = System::Drawing::Point(4, 195);
 			   this->panel5->Name = L"panel5";
-			   this->panel5->Size = System::Drawing::Size(166, 48);
+			   this->panel5->Size = System::Drawing::Size(164, 48);
 			   this->panel5->TabIndex = 12;
 			   // 
 			   // AvgSys
@@ -457,9 +594,9 @@ namespace SystemLatencyApp {
 			   this->panel6->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			   this->panel6->Controls->Add(this->AvgMouse);
 			   this->panel6->Controls->Add(this->Label9);
-			   this->panel6->Location = System::Drawing::Point(175, 228);
+			   this->panel6->Location = System::Drawing::Point(175, 195);
 			   this->panel6->Name = L"panel6";
-			   this->panel6->Size = System::Drawing::Size(166, 48);
+			   this->panel6->Size = System::Drawing::Size(164, 48);
 			   this->panel6->TabIndex = 13;
 			   // 
 			   // AvgMouse
@@ -488,10 +625,47 @@ namespace SystemLatencyApp {
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->panel1->AutoSize = true;
 			   this->panel1->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-			   this->panel1->Location = System::Drawing::Point(347, 61);
+			   this->panel1->Location = System::Drawing::Point(346, 37);
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(166, 0);
 			   this->panel1->TabIndex = 10;
+			   // 
+			   // panel8
+			   // 
+			   this->panel8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->panel8->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			   this->panel8->Controls->Add(this->label8);
+			   this->panel8->Controls->Add(this->SaveName);
+			   this->panel8->Location = System::Drawing::Point(175, 286);
+			   this->panel8->Name = L"panel8";
+			   this->panel8->Size = System::Drawing::Size(164, 59);
+			   this->panel8->TabIndex = 14;
+			   // 
+			   // label8
+			   // 
+			   this->label8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				   | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->label8->AutoSize = true;
+			   this->label8->BackColor = System::Drawing::Color::Gray;
+			   this->label8->Location = System::Drawing::Point(0, 0);
+			   this->label8->Name = L"label8";
+			   this->label8->Size = System::Drawing::Size(64, 13);
+			   this->label8->TabIndex = 11;
+			   this->label8->Text = L"Save name:";
+			   // 
+			   // SaveName
+			   // 
+			   this->SaveName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				   | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->SaveName->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::RecentlyUsedList;
+			   this->SaveName->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			   this->SaveName->Location = System::Drawing::Point(0, 18);
+			   this->SaveName->Name = L"SaveName";
+			   this->SaveName->Size = System::Drawing::Size(161, 20);
+			   this->SaveName->TabIndex = 16;
 			   // 
 			   // panel7
 			   // 
@@ -500,9 +674,9 @@ namespace SystemLatencyApp {
 			   this->panel7->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			   this->panel7->Controls->Add(this->MinSys);
 			   this->panel7->Controls->Add(this->Label10);
-			   this->panel7->Location = System::Drawing::Point(347, 228);
+			   this->panel7->Location = System::Drawing::Point(4, 140);
 			   this->panel7->Name = L"panel7";
-			   this->panel7->Size = System::Drawing::Size(166, 48);
+			   this->panel7->Size = System::Drawing::Size(164, 48);
 			   this->panel7->TabIndex = 14;
 			   // 
 			   // MinSys
@@ -521,45 +695,9 @@ namespace SystemLatencyApp {
 			   this->Label10->BackColor = System::Drawing::Color::Gray;
 			   this->Label10->Location = System::Drawing::Point(6, 11);
 			   this->Label10->Name = L"Label10";
-			   this->Label10->Size = System::Drawing::Size(86, 13);
+			   this->Label10->Size = System::Drawing::Size(123, 13);
 			   this->Label10->TabIndex = 10;
-			   this->Label10->Text = L"Minimal Latency:";
-			   // 
-			   // panel8
-			   // 
-			   this->panel8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->panel8->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-			   this->panel8->Controls->Add(this->label8);
-			   this->panel8->Controls->Add(this->SaveName);
-			   this->panel8->Location = System::Drawing::Point(175, 371);
-			   this->panel8->Name = L"panel8";
-			   this->panel8->Size = System::Drawing::Size(166, 68);
-			   this->panel8->TabIndex = 14;
-			   // 
-			   // label8
-			   // 
-			   this->label8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				   | System::Windows::Forms::AnchorStyles::Left)
-				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->label8->BackColor = System::Drawing::Color::Gray;
-			   this->label8->Location = System::Drawing::Point(0, 0);
-			   this->label8->Name = L"label8";
-			   this->label8->Size = System::Drawing::Size(163, 15);
-			   this->label8->TabIndex = 11;
-			   this->label8->Text = L"Save name:";
-			   // 
-			   // SaveName
-			   // 
-			   this->SaveName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				   | System::Windows::Forms::AnchorStyles::Left)
-				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->SaveName->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::RecentlyUsedList;
-			   this->SaveName->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			   this->SaveName->Location = System::Drawing::Point(0, 18);
-			   this->SaveName->Name = L"SaveName";
-			   this->SaveName->Size = System::Drawing::Size(163, 20);
-			   this->SaveName->TabIndex = 16;
+			   this->Label10->Text = L"Minimal System Latency:";
 			   // 
 			   // LightZone
 			   // 
@@ -567,11 +705,10 @@ namespace SystemLatencyApp {
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->LightZone->AutoScroll = true;
 			   this->LightZone->AutoSize = true;
-			   this->LightZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(20)));
+			   this->LightZone->BackColor = System::Drawing::Color::Black;
 			   this->LightZone->Location = System::Drawing::Point(12, 498);
 			   this->LightZone->Name = L"LightZone";
-			   this->LightZone->Size = System::Drawing::Size(1029, 253);
+			   this->LightZone->Size = System::Drawing::Size(1045, 253);
 			   this->LightZone->TabIndex = 13;
 			   // 
 			   // label11
@@ -580,9 +717,9 @@ namespace SystemLatencyApp {
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->label11->AutoSize = true;
 			   this->label11->BackColor = System::Drawing::Color::Gray;
-			   this->label11->Location = System::Drawing::Point(264, 1);
+			   this->label11->Location = System::Drawing::Point(260, 1);
 			   this->label11->Name = L"label11";
-			   this->label11->Size = System::Drawing::Size(123, 26);
+			   this->label11->Size = System::Drawing::Size(121, 26);
 			   this->label11->TabIndex = 12;
 			   this->label11->Text = L"Average Mouse Latency:";
 			   // 
@@ -592,9 +729,9 @@ namespace SystemLatencyApp {
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->label7->AutoSize = true;
 			   this->label7->BackColor = System::Drawing::Color::Gray;
-			   this->label7->Location = System::Drawing::Point(394, 1);
+			   this->label7->Location = System::Drawing::Point(388, 1);
 			   this->label7->Name = L"label7";
-			   this->label7->Size = System::Drawing::Size(124, 13);
+			   this->label7->Size = System::Drawing::Size(123, 13);
 			   this->label7->TabIndex = 11;
 			   this->label7->Text = L"Minimal System Latency:";
 			   // 
@@ -604,9 +741,9 @@ namespace SystemLatencyApp {
 				   | System::Windows::Forms::AnchorStyles::Right));
 			   this->label13->AutoSize = true;
 			   this->label13->BackColor = System::Drawing::Color::Gray;
-			   this->label13->Location = System::Drawing::Point(134, 1);
+			   this->label13->Location = System::Drawing::Point(132, 1);
 			   this->label13->Name = L"label13";
-			   this->label13->Size = System::Drawing::Size(123, 26);
+			   this->label13->Size = System::Drawing::Size(121, 26);
 			   this->label13->TabIndex = 14;
 			   this->label13->Text = L"Average System Latency:";
 			   // 
@@ -618,12 +755,15 @@ namespace SystemLatencyApp {
 			   this->label14->BackColor = System::Drawing::Color::Gray;
 			   this->label14->Location = System::Drawing::Point(4, 1);
 			   this->label14->Name = L"label14";
-			   this->label14->Size = System::Drawing::Size(123, 13);
+			   this->label14->Size = System::Drawing::Size(121, 13);
 			   this->label14->TabIndex = 15;
 			   this->label14->Text = L"Name:";
 			   // 
 			   // Saves
 			   // 
+			   this->Saves->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->Saves->BackColor = System::Drawing::Color::Gray;
 			   this->Saves->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			   this->Saves->ColumnCount = 4;
 			   this->Saves->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
@@ -634,16 +774,16 @@ namespace SystemLatencyApp {
 			   this->Saves->Controls->Add(this->label14, 0, 0);
 			   this->Saves->Controls->Add(this->label11, 2, 0);
 			   this->Saves->Controls->Add(this->label13, 1, 0);
-			   this->Saves->Location = System::Drawing::Point(519, 3);
+			   this->Saves->Location = System::Drawing::Point(542, 3);
 			   this->Saves->Name = L"Saves";
 			   this->Saves->RowCount = 1;
 			   this->Saves->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			   this->Saves->Size = System::Drawing::Size(522, 439);
+			   this->Saves->Size = System::Drawing::Size(515, 439);
 			   this->Saves->TabIndex = 14;
 			   // 
 			   // Export
 			   // 
-			   this->Export->Location = System::Drawing::Point(519, 460);
+			   this->Export->Location = System::Drawing::Point(542, 460);
 			   this->Export->Name = L"Export";
 			   this->Export->Size = System::Drawing::Size(75, 23);
 			   this->Export->TabIndex = 15;
@@ -653,7 +793,7 @@ namespace SystemLatencyApp {
 			   // 
 			   // Import
 			   // 
-			   this->Import->Location = System::Drawing::Point(959, 445);
+			   this->Import->Location = System::Drawing::Point(982, 445);
 			   this->Import->Name = L"Import";
 			   this->Import->Size = System::Drawing::Size(75, 23);
 			   this->Import->TabIndex = 16;
@@ -664,9 +804,10 @@ namespace SystemLatencyApp {
 			   // panel9
 			   // 
 			   this->panel9->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			   this->panel9->BackColor = System::Drawing::Color::Gray;
 			   this->panel9->Controls->Add(this->label15);
 			   this->panel9->Controls->Add(this->ExportName);
-			   this->panel9->Location = System::Drawing::Point(600, 448);
+			   this->panel9->Location = System::Drawing::Point(623, 448);
 			   this->panel9->Name = L"panel9";
 			   this->panel9->Size = System::Drawing::Size(166, 44);
 			   this->panel9->TabIndex = 17;
@@ -696,9 +837,10 @@ namespace SystemLatencyApp {
 			   // panel10
 			   // 
 			   this->panel10->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			   this->panel10->BackColor = System::Drawing::Color::Gray;
 			   this->panel10->Controls->Add(this->FileCB);
 			   this->panel10->Controls->Add(this->label16);
-			   this->panel10->Location = System::Drawing::Point(790, 448);
+			   this->panel10->Location = System::Drawing::Point(813, 448);
 			   this->panel10->Name = L"panel10";
 			   this->panel10->Size = System::Drawing::Size(166, 44);
 			   this->panel10->TabIndex = 18;
@@ -725,7 +867,7 @@ namespace SystemLatencyApp {
 			   // 
 			   // RemoveSavedFile
 			   // 
-			   this->RemoveSavedFile->Location = System::Drawing::Point(959, 469);
+			   this->RemoveSavedFile->Location = System::Drawing::Point(982, 469);
 			   this->RemoveSavedFile->Name = L"RemoveSavedFile";
 			   this->RemoveSavedFile->Size = System::Drawing::Size(75, 23);
 			   this->RemoveSavedFile->TabIndex = 19;
@@ -733,12 +875,34 @@ namespace SystemLatencyApp {
 			   this->RemoveSavedFile->UseVisualStyleBackColor = true;
 			   this->RemoveSavedFile->Click += gcnew System::EventHandler(this, &MyForm::RemoveSelectedFile);
 			   // 
+			   // IntegratedCheck
+			   // 
+			   this->IntegratedCheck->AutoSize = true;
+			   this->IntegratedCheck->BackColor = System::Drawing::Color::Gray;
+			   this->IntegratedCheck->Location = System::Drawing::Point(12, 13);
+			   this->IntegratedCheck->Name = L"IntegratedCheck";
+			   this->IntegratedCheck->Size = System::Drawing::Size(111, 17);
+			   this->IntegratedCheck->TabIndex = 20;
+			   this->IntegratedCheck->Text = L"Game Integrated\?";
+			   this->toolTip1->SetToolTip(this->IntegratedCheck, L"In this mode the program will simulate mouse button click in game.  Position the "
+				   L"sensor in the place where the pixels will change the most after pressing left mo"
+				   L"use button");
+			   this->IntegratedCheck->UseVisualStyleBackColor = false;
+			   // 
+			   // toolTip1
+			   // 
+			   this->toolTip1->AutoPopDelay = 10000;
+			   this->toolTip1->InitialDelay = 300;
+			   this->toolTip1->ReshowDelay = 100;
+			   // 
 			   // MyForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->BackColor = System::Drawing::Color::Black;
-			   this->ClientSize = System::Drawing::Size(1053, 757);
+			   this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			   this->ClientSize = System::Drawing::Size(1069, 757);
+			   this->Controls->Add(this->IntegratedCheck);
 			   this->Controls->Add(this->RemoveSavedFile);
 			   this->Controls->Add(this->panel10);
 			   this->Controls->Add(this->panel9);
@@ -753,6 +917,12 @@ namespace SystemLatencyApp {
 			   this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			   this->tableLayoutPanel1->ResumeLayout(false);
 			   this->tableLayoutPanel1->PerformLayout();
+			   this->panel12->ResumeLayout(false);
+			   this->panel12->PerformLayout();
+			   this->panel13->ResumeLayout(false);
+			   this->panel13->PerformLayout();
+			   this->panel11->ResumeLayout(false);
+			   this->panel11->PerformLayout();
 			   this->panel3->ResumeLayout(false);
 			   this->panel3->PerformLayout();
 			   this->panel2->ResumeLayout(false);
@@ -763,10 +933,10 @@ namespace SystemLatencyApp {
 			   this->panel5->PerformLayout();
 			   this->panel6->ResumeLayout(false);
 			   this->panel6->PerformLayout();
-			   this->panel7->ResumeLayout(false);
-			   this->panel7->PerformLayout();
 			   this->panel8->ResumeLayout(false);
 			   this->panel8->PerformLayout();
+			   this->panel7->ResumeLayout(false);
+			   this->panel7->PerformLayout();
 			   this->Saves->ResumeLayout(false);
 			   this->Saves->PerformLayout();
 			   this->panel9->ResumeLayout(false);
@@ -778,7 +948,6 @@ namespace SystemLatencyApp {
 		   }
 
 #pragma endregion
-
 
 		   TCHAR getDirFolder(TCHAR szPath[MAX_PATH]) {
 			   if (SUCCEEDED(SHGetFolderPath(NULL,
@@ -811,6 +980,14 @@ namespace SystemLatencyApp {
 			   return labolo;
 		   }
 
+		   int GetLastMouse()
+		   {
+			   if (TestsMouse.size() <= 0)
+				   return 0;
+			   else
+				   return TestsMouse.back();
+		   }
+
 	public: System::Void Start(System::Object^ sender, System::EventArgs^ e) {
 		
 		if (comboBox1->SelectedIndex > -1) {
@@ -837,14 +1014,20 @@ namespace SystemLatencyApp {
 		}
 		else MessageBox::Show("Select a port first", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
 		}
+
+
 	public: System::Void Received(System::Object^ sender, System::IO::Ports::SerialDataReceivedEventArgs^ e) {
 		String^ IncData = serialPort1->ReadLine();
 		std::string StrData = msclr::interop::marshal_as< std::string >(IncData);
 
 		if (StrData.find('b') != std::string::npos) {
-
-			start = std::chrono::steady_clock::now();
-			LightZone->BackColor = Color::White;
+			if (IntegratedCheck->Checked) {
+				mouse_event(MOUSEEVENTF_LEFTDOWN, 813, 731, 0, 0);
+				mouse_event(MOUSEEVENTF_LEFTUP, 813, 731, 0, 0);
+			}
+			else
+				start = std::chrono::steady_clock::now();
+				LightZone->BackColor = Color::White;
 		}
 		else if (StrData.find("z") != std::string::npos) {
 			PingEnd = std::chrono::steady_clock::now();
@@ -855,23 +1038,29 @@ namespace SystemLatencyApp {
 			MouseLat->Text = gcnew String(Pingint_ms.count() + "ms");
 			TestsMouse.push_back(Pingint_ms.count());
 			AvgMouse->Text = (accumulate(TestsMouse.begin(), TestsMouse.end(), 0.0) / TestsMouse.size()).ToString("0.00" + "ms");
+			MinMouse->Text = (*min_element(TestsMouse.begin(), TestsMouse.end())).ToString() + "ms";
 		}
 		else if (std::stoi(StrData) > 15) {
 			msclr::interop::marshal_context context;
-			String^ DataText = gcnew String(IncData + "ms");
-			SysLat->Text = DataText;
-			std::string MouseLatVal = context.marshal_as<std::string>(MouseLat->Text);
-			int Syslat = (stoi(StrData.substr(0, StrData.size() - 4)) + stoi(MouseLatVal));
-			String^ ComLatText = gcnew String((Syslat.ToString()) + "ms");
-			PcLat->Text = ComLatText;
+			int SysLatInt = std::stoi(StrData);
+			int PCLatInt = std::stoi(StrData) - GetLastMouse();
+			//String^ DataText = gcnew String(IncData + "ms");
+			SysLat->Text = gcnew String(SysLatInt + "ms");
+			//std::string MouseLatVal = context.marshal_as<std::string>(MouseLat->Text);
+			//int Syslat = (stoi(StrData.substr(0, StrData.size() - 4)) + stoi(MouseLatVal));
+			//String^ ComLatText = gcnew String((Syslat.ToString()) + "ms");
+			PcLat->Text = gcnew String(PCLatInt + "ms");
 			LightZone->BackColor = Color::Black;
 			if (std::stoi(StrData) < 300) {
-				TestsSys.push_back(std::stoi(StrData));
+				TestsSys.push_back(SysLatInt);
+				TestsPC.push_back(PCLatInt);
 			}
-			serialPort1->Write("a");
-			PingStart = std::chrono::steady_clock::now();
 			AvgSys->Text = (accumulate(TestsSys.begin(), TestsSys.end(), 0.0) / TestsSys.size()).ToString("0.00") + "ms";
 			MinSys->Text = (*min_element(TestsSys.begin(), TestsSys.end())).ToString() + "ms";
+			AvgPC->Text = (accumulate(TestsPC.begin(), TestsPC.end(), 0.0) / TestsPC.size()).ToString("0.00") + "ms";
+			MinPC->Text = (*min_element(TestsPC.begin(), TestsPC.end())).ToString() + "ms";
+			serialPort1->Write("a");
+			PingStart = std::chrono::steady_clock::now();
 		}
 		else {
 			LightZone->BackColor = Color::Black;
@@ -905,9 +1094,13 @@ namespace SystemLatencyApp {
 	private: System::Void ResetTests(System::Object^ sender, System::EventArgs^ e) {
 		TestsSys.clear();
 		TestsMouse.clear();
+		TestsPC.clear();
 		AvgSys->Text = "0ms";
 		MinSys->Text = "0ms";
 		AvgMouse->Text = "0ms";
+		MinMouse->Text = "0ms";
+		AvgPC->Text = "0ms";
+		MinPC->Text = "0ms";
 	}
 	private: System::Void SaveRecords(System::Object^ sender, System::EventArgs^ e) {
 
