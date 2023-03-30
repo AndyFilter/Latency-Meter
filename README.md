@@ -1,3 +1,6 @@
+# [DEPRECATED]
+Please use the [newer verison](https://github.com/AndyFilter/LatencyMeterRefreshed). Re-written on **DirectX11** backend without using WinForms.
+
 # Latency-Meter
 This program lets you measure latency of your system given that you have arduino.
 
